@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  pg:
+    container_name: pg
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: dash
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./pg:/docker-entrypoint-initdb.d # Mount thư mục pg vào container
+    networks:
+      - nest_network
+    ports:
+      - "5432:5432" # Ánh xạ cổng 5432 của container vào cổng 5432 của máy host
+
+  # nestapp:
+  #   image: nestapp
+  #   restart: always
+  #   networks:
+  #     - nest_network
+
+networks:
+  nest_network:
